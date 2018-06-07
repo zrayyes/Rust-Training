@@ -1,10 +1,17 @@
+extern crate rand;
+
 // Input/Output library
+use rand::Rng;
 use std::io;
 
 fn main() {
     println!("Guess the number!");
 
     println!("Please input your guess.");
+
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    println!("{}", secret_number);
 
     // mut = make a variable mutable
     let mut guess = String::new();
