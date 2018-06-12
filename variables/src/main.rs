@@ -25,7 +25,24 @@ fn main() {
 
     another_function(15, 20);
 
-    println!("Six = {}", plus_one(5));
+    loop {
+        println!("Six = {}", plus_one(5));
+        break;
+    }
+
+    let mut counter = 3;
+    while counter != 0 {
+        println!("{}!", counter);
+        counter = counter - 1;
+    }
+
+    for element in a.iter() {
+        println!("{}", element);
+    }
+
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
 }
 
 fn another_function(y: i32, z: i32) {
