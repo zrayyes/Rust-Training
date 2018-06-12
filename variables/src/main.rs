@@ -21,5 +21,12 @@ fn main() {
     // array
     let a = [1, 2, 3, 4, 5]; // a[0] - a[4]
 
-    println!("The value of x is: {}", a[0]);
+    println!("X = {}", a[0]);
+
+    another_function(15, 20);
+}
+
+fn another_function(y: i32, z: i32) {
+    println!("Y = {}", y);
+    println!("Z = {}", z);
 }
