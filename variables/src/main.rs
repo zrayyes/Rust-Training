@@ -27,6 +27,12 @@ fn main() {
 }
 
 fn another_function(y: i32, z: i32) {
+    let a = {
+        let b = 3;
+        b + 1
+    };
+
+    println!("A = {}", a);
     println!("Y = {}", y);
     println!("Z = {}", z);
 }
