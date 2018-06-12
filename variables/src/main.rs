@@ -24,6 +24,8 @@ fn main() {
     println!("X = {}", a[0]);
 
     another_function(15, 20);
+
+    println!("Six = {}", plus_one(5));
 }
 
 fn another_function(y: i32, z: i32) {
@@ -35,4 +37,8 @@ fn another_function(y: i32, z: i32) {
     println!("A = {}", a);
     println!("Y = {}", y);
     println!("Z = {}", z);
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
 }
