@@ -14,9 +14,12 @@ fn main() {
     // remainder
     let remainder = 43 % 5;
 
-    //tuple
-    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    // tuple
+    let tup: (i32, f64, u8) = (500, 6.4, 1); // x.0 - x.2
     let (x, y, z) = tup;
 
-    println!("The value of x is: {}", tup.1);
+    // array
+    let a = [1, 2, 3, 4, 5]; // a[0] - a[4]
+
+    println!("The value of x is: {}", a[0]);
 }
