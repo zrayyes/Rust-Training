@@ -29,14 +29,19 @@ fn main() {
 }
 
 fn another_function(y: i32, z: i32) {
-    let a = {
-        let b = 3;
-        b + 1
+    let b = {
+        if y > z {
+            y
+        } else {
+            z
+        }
     };
 
-    println!("A = {}", a);
-    println!("Y = {}", y);
-    println!("Z = {}", z);
+    if y > z {
+        println!("Y is greater than Z, b = {}", b);
+    } else {
+        println!("Z is greater than Y, b = {}", b);
+    }
 }
 
 fn plus_one(x: i32) -> i32 {
