@@ -28,6 +28,15 @@ fn main() {
     } // r1 goes out of scope here, so we can make a new reference with no problems.
 
     let r2 = &mut x;
+
+    let word = first_word(&r2);
+
+    println!("{}", word);
+
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
 }
 
 fn takes_ownership(some_string: String) {
@@ -38,9 +47,9 @@ fn makes_copy(some_integer: i32) {
     println!("{}", some_integer);
 }
 
-fn takes_and_gives_back(a_string: String) -> String {
-    a_string
-}
+// fn takes_and_gives_back(a_string: String) -> String {
+//     a_string
+// }
 
 fn calculate_length(s: &String) -> usize {
     s.len()
@@ -50,8 +59,23 @@ fn change(some_string: &mut String) {
     some_string.push_str(", world");
 }
 
-fn dangle() -> &String {
-    let s = String::from("hello");
+// fn dangle() -> &String {
+//     let s = String::from("hello");
 
-    &s
+//     &s
+// }
+
+// usize = byte index
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes(); // convert string to array of bytes
+
+    // loop over bytes array
+    for (i, &item) in bytes.iter().enumerate() {
+        // search for byte that equals the 'byte literal' syntax
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+
+    &s[..]
 }
