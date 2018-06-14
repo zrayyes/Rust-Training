@@ -28,7 +28,6 @@ fn main() {
     } // r1 goes out of scope here, so we can make a new reference with no problems.
 
     let r2 = &mut x;
-
 }
 
 fn takes_ownership(some_string: String) {
@@ -49,4 +48,10 @@ fn calculate_length(s: &String) -> usize {
 
 fn change(some_string: &mut String) {
     some_string.push_str(", world");
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    &s
 }
