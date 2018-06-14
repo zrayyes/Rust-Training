@@ -15,25 +15,38 @@ fn main() {
     let len = calculate_length(&s1);
 
     println!("{}", len);
-} // Here, x goes out of scope, then s. But because s's value was moved, nothing
-  // special happens.
 
-fn takes_ownership(some_string: String) {
-    // some_string comes into scope
-    println!("{}", some_string);
-} // Here, some_string goes out of scope and `drop` is called. The backing
-  // memory is freed.
+    let mut x = String::from("hello");
 
-fn makes_copy(some_integer: i32) {
-    // some_integer comes into scope
-    println!("{}", some_integer);
-} // Here, some_integer goes out of scope. Nothing special happens.
+    change(&mut x);
 
-fn takes_and_gives_back(a_string: String) -> String {
-    // a_string comes into scope
-    a_string // a_string is returned and moves out to the calling function
+    println!("{}", x);
+
+    // Avoid data races
+    {
+        let r1 = &mut x;
+    } // r1 goes out of scope here, so we can make a new reference with no problems.
+
+    let r2 = &mut x;
+
 }
 
-fn calculate_length(s: &String) -> usize { // borrowing
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
+}
+
+fn calculate_length(s: &String) -> usize {
     s.len()
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
 }
