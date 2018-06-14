@@ -24,5 +24,13 @@ fn main() {
     user2.active = false;
 
     println!("{}", user1.active);
+}
 
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
 }
