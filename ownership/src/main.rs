@@ -29,9 +29,8 @@ fn main() {
 
     let r2 = &mut x;
 
-    let word = first_word(&r2);
-
-    println!("{}", word);
+    println!("{}", first_word(&r2));
+    println!("{}", second_word(&r2));
 
     let s = String::from("hello world");
 
@@ -66,7 +65,7 @@ fn change(some_string: &mut String) {
 // }
 
 // usize = byte index
-fn first_word(s: &String) -> &str {
+fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes(); // convert string to array of bytes
 
     // loop over bytes array
@@ -77,5 +76,16 @@ fn first_word(s: &String) -> &str {
         }
     }
 
+    &s[..]
+}
+
+fn second_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[i + 1..];
+        }
+    }
     &s[..]
 }
