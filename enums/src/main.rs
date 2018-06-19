@@ -12,11 +12,11 @@ impl Message {
 }
 
 // Included in prelude, NO need for Option::Some()
-enum Option<T> {
-    // T - Can hold a value of any type
-    Some(T),
-    None,
-}
+// enum Option<T> {
+//     // T - Can hold a value of any type
+//     Some(T),
+//     None,
+// }
 
 #[derive(Debug)] // So we can inspect the state in a minute
 enum UsState {
@@ -41,6 +41,10 @@ fn main() {
 
     println!("{}", value_in_cents(Coin::Penny));
     value_in_cents(Coin::Quarter(UsState::Alaska));
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
 }
 
 fn value_in_cents(coin: Coin) -> u32 {
@@ -55,5 +59,12 @@ fn value_in_cents(coin: Coin) -> u32 {
             println!("State quarter from {:?}!", state);
             25
         }
+    }
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
     }
 }
