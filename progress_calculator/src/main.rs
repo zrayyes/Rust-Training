@@ -19,7 +19,7 @@ fn main() {
     }
 }
 
-fn welcome_message() -> {
+fn welcome_message() {
         println!("Select Option: ");
         println!("1 - Calculate percentage done.");
         println!("2 - Calculate targeted percentage.");
