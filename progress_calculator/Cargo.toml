@@ -1,0 +1,6 @@
+[package]
+name = "progress_calculator"
+version = "0.1.0"
+authors = ["Zuhair Rayyes <rayyes.z@ikarus.at>"]
+
+[dependencies]
