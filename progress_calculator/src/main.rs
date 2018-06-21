@@ -6,12 +6,6 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() == 1 {
         welcome_message();
-
-        match readline().trim() {
-            "1" => calculate_percentage(),
-            "2" => calculate_bfp(),
-            _ => println!("Invalid option"),
-        }
     } else if args[1] == "1" {
         calculate_percentage();
     } else if args[1] == "2" {
@@ -24,7 +18,13 @@ fn main() {
 fn welcome_message() {
     println!("Select Option: ");
     println!("1 - Calculate percentage done.");
-    println!("2 - Calculate targeted percentage.");
+    println!("2 - Calculate body fat percentage.");
+
+    match readline().trim() {
+        "1" => calculate_percentage(),
+        "2" => calculate_bfp(),
+        _ => println!("Invalid option"),
+    }
 }
 
 fn calculate_percentage() {
