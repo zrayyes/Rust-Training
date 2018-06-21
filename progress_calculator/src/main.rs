@@ -8,28 +8,36 @@ fn main() {
         welcome_message();
 
         match readline().trim() {
-            "1" => println!("{}% done!", calculate_percentage()),
-            "2" => println!("two"),
+            "1" => calculate_percentage(),
+            "2" => println!("{}", calculate_bfp_at_level()),
             _ => println!("Invalid option"),
         }
     } else if args[1] == "1" {
-        println!("{}% done!", calculate_percentage());
+        calculate_percentage();
+    } else if args[1] == "2" {
+        println!("{}", calculate_bfp_at_level());
     } else {
         println!("Invalid argument/s");
     }
 }
 
 fn welcome_message() {
-        println!("Select Option: ");
-        println!("1 - Calculate percentage done.");
-        println!("2 - Calculate targeted percentage.");
+    println!("Select Option: ");
+    println!("1 - Calculate percentage done.");
+    println!("2 - Calculate targeted percentage.");
 }
 
-fn calculate_percentage() -> f32 {
+fn calculate_percentage() {
     let start = readline_as_float("Please input starting weight: ");
     let target = readline_as_float("Please input target weight: ");
     let current = readline_as_float("Please input current weight: ");
-    ((start - current) / (start - target)) * 100.0
+    println!("{}% done!", ((start - current) / (start - target)) * 100.0);
+}
+
+fn calculate_bfp_at_level() -> f32 {
+    let weight = readline_as_float("Please input weight: ");
+    let lm = readline_as_float("Please input leanmass: ");
+    ((weight - lm) / weight) * 100.0
 }
 
 fn readline() -> String {
