@@ -9,13 +9,13 @@ fn main() {
 
         match readline().trim() {
             "1" => calculate_percentage(),
-            "2" => println!("{}", calculate_bfp_at_level()),
+            "2" => calculate_bfp(),
             _ => println!("Invalid option"),
         }
     } else if args[1] == "1" {
         calculate_percentage();
     } else if args[1] == "2" {
-        println!("{}", calculate_bfp_at_level());
+        calculate_bfp();
     } else {
         println!("Invalid argument/s");
     }
@@ -34,10 +34,10 @@ fn calculate_percentage() {
     println!("{}% done!", ((start - current) / (start - target)) * 100.0);
 }
 
-fn calculate_bfp_at_level() -> f32 {
+fn calculate_bfp() {
     let weight = readline_as_float("Please input weight: ");
     let lm = readline_as_float("Please input leanmass: ");
-    ((weight - lm) / weight) * 100.0
+    println!("{}% done!", ((weight - lm) / weight) * 100.0);
 }
 
 fn readline() -> String {
