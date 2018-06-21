@@ -1,4 +1,5 @@
 use std::io;
+use std::process;
 
 fn main() {
     let start = readline_as_float("Please input starting weight: ");
@@ -14,12 +15,17 @@ fn do_math(start: f32, target: f32, current: f32) -> f32 {
 
 fn readline_as_float(message: &str) -> f32 {
     let mut read = String::new();
-    
+
     println!("{}", message);
 
     io::stdin()
         .read_line(&mut read)
         .expect("Failed to read line");
-    
-    read.trim().parse::<f32>().unwrap()
+
+    if let "0" = read.trim() {
+        println!("Invalid number");
+        process::exit(1);
+    }
+
+    read.trim().parse::<f32>().expect("Invalid Number")
 }
