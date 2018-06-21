@@ -4,9 +4,11 @@ use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if (args.len() == 1) {
-        println!("Normal");
-    } else if (args[1] == "1") {
+    if args.len() == 1 {
+        println!("Select Option: ");
+        println!("1 - Calculate percentage done.");
+        println!("2 - Calculate targeted percentage.");
+    } else if args[1] == "1" {
         println!("{}% done!", calculate_percentage());
     } else {
         println!("Invalid argument/s");
@@ -24,14 +26,18 @@ fn do_math(start: f32, target: f32, current: f32) -> f32 {
     (start - current) / (start - target)
 }
 
-fn readline_as_float(message: &str) -> f32 {
+fn readline() -> String {
     let mut read = String::new();
-
-    println!("{}", message);
-
     io::stdin()
         .read_line(&mut read)
         .expect("Failed to read line");
+
+    read
+}
+
+fn readline_as_float(message: &str) -> f32 {
+    println!("{}", message);
+    let read = readline();
 
     if let "0" = read.trim() {
         println!("Invalid number");
