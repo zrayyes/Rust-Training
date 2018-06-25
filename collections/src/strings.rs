@@ -14,4 +14,8 @@ fn main() {
     let s3 = String::from("toe");
     let s = format!("{}-{}-{}", s1, s2, s3);
     println!("{}", s);
+
+    for c in s3.chars() {
+        println!("{}", c);
+    }
 }
