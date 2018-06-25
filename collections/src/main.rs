@@ -8,4 +8,10 @@ fn main() {
     println!("{}", &v[3]);
     // returns None if value does not exist
     println!("{:?}", v.get(3));
+
+    for i in &mut v {
+        *i += 50;
+    }
+
+    println!("{:?}", v);
 }
