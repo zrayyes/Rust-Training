@@ -4,4 +4,8 @@ fn main() {
     v.push(4);
     v.push(5);
     println!("{:?}", v);
+    // panics if value does not exist
+    println!("{}", &v[3]);
+    // returns None if value does not exist
+    println!("{:?}", v.get(3));
 }
