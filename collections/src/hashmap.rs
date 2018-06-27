@@ -27,4 +27,11 @@ fn main() {
     for (key, value) in &scores {
         println!("{}: {}", key, value);
     }
+
+    // check if value exists and if not insert
+    let mut new_scores = HashMap::new();
+    new_scores.entry(String::from("Green")).or_insert(15);
+    new_scores.entry(String::from("Red")).or_insert(25);
+
+    println!("{:?}", new_scores);
 }
