@@ -7,11 +7,7 @@ fn main() {
 }
 
 fn mean(list: &Vec<i32>) -> f32 {
-    let mut count = 0;
-    for number in list {
-        count += number
-    }
-    (count as f32) / (list.len() as f32)
+    list.iter().sum::<i32>() as f32 / list.len() as f32
 }
 
 fn median(list: &mut Vec<i32>) -> f32 {
