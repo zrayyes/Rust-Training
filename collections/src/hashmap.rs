@@ -1,19 +1,8 @@
 use std::collections::HashMap;
 
 fn main() {
-    let mut scores = HashMap::new();
-
-    scores.insert(String::from("Blue"), 10);
-    scores.insert(String::from("Yellow"), 50);
-
-    println!("{:?}", scores);
-    println!("{}", scores["Blue"]);
-
-    // OR
-
     let teams = vec![String::from("Blue"), String::from("Yellow")];
     let scores = vec![10, 50];
-
     // _ - infer type from values
     let scores: HashMap<_, _> = teams.iter().zip(scores.iter()).collect();
 
@@ -34,4 +23,17 @@ fn main() {
     new_scores.entry(String::from("Red")).or_insert(25);
 
     println!("{:?}", new_scores);
+
+    let text = "hello world new world";
+
+    let mut wordcount = HashMap::new();
+
+    for word in text.split_whitespace() {
+        // returns a mutable refernce to the value for this key
+        let count = wordcount.entry(word).or_insert(0);
+        // derefrence count (which is &mut V)
+        *count += 1;
+    }
+
+    println!("{:?}", wordcount);
 }
