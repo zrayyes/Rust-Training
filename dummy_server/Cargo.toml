@@ -1,0 +1,7 @@
+[package]
+name = "dummy_server"
+version = "0.1.0"
+authors = ["Zuhair Rayyes <rayyes.z@ikarus.at>"]
+
+[dependencies]
+hyper = "0.12"
