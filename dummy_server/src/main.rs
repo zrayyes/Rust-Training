@@ -19,6 +19,7 @@ fn main() {
         .serve(new_svc)
         .map_err(|e| eprintln!("server error: {}", e));
 
+    println!("Server running on http://{}/", addr);
     // Run this server
     hyper::rt::run(server);
 }
