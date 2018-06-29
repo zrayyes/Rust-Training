@@ -5,3 +5,4 @@ authors = ["Zuhair Rayyes <rayyes.z@ikarus.at>"]
 
 [dependencies]
 hyper = "0.12"
+futures = "0.1"
