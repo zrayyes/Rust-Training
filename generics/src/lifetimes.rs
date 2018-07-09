@@ -6,6 +6,7 @@ fn main() {
     println!("The longest string is {}", result);
 }
 
+// returned lifetime needs to be less than or equal to lifetime of x and y
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
