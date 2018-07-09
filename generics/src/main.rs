@@ -1,3 +1,29 @@
+struct NewsArticle {
+    headline: String,
+    location: String,
+    author: String,
+    content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {}, ({})", self.headline, self.author, self.location)
+    }
+}
+
+struct Tweet {
+    username: String,
+    content: String,
+    reply: bool,
+    retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -8,7 +34,8 @@ fn main() {
     println!("The largest number is {}", largest(&number_list));
 }
 
-fn largest(list: &[i32]) -> i32 {
+// T stays the same type after being specified
+fn largest<T>(list: &[T]) -> T {
     let mut largest = list[0];
 
     for &item in list.iter() {
