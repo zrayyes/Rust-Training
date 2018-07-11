@@ -4,11 +4,15 @@ fn main() {
     // .collect -> iterator to vector
     let args: Vec<String> = env::args().collect();
 
-    let path = &args[0];
-    let query= &args[1];
-    let filename= &args[2];
+    if args.len() == 3 {
 
-    println!("Searching for {}", query);
-    println!("In file {}", filename);
-    
+        // let path = &args[0];
+        let query = &args[1];
+        let filename = &args[2];
+
+        println!("Searching for {}", query);
+        println!("In file {}", filename);
+    } else {
+        println!("Invalid number of arguments, need query and filename");
+    }
 }
