@@ -15,12 +15,12 @@ fn main() {
         println!("In file {}", filename);
 
         // ? -> handle error
-        let mut file = File::open(filename).expect("file not found");
+        let mut f = File::open(filename).expect("file not found");
         let mut content = String::new();
-        file.read_to_string(&mut content)
+        f.read_to_string(&mut content)
             .expect("failed to read file");
 
-        println!("Found: \n{:?}", content);
+        println!("Found: \n{}", content);
     } else {
         println!("Invalid number of arguments, need query and filename");
     }
