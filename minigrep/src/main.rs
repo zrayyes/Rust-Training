@@ -7,14 +7,20 @@ struct Config {
     filename: String,
 }
 
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = args[1].clone();
+        let filename = args[2].clone();
+
+        Config { query, filename }
+    }
+}
+
 fn main() {
     // .collect -> iterator to vector
     let args: Vec<String> = env::args().collect();
 
-    if args.len() < 3 {
-        panic!("Invalid number of arguments, need query and filename");
-    }
-    let config = parse_config(&args);
+    let config = Config::new(&args);
 
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
@@ -25,11 +31,4 @@ fn main() {
     f.read_to_string(&mut content).expect("failed to read file");
 
     println!("Found: \n{}", content);
-}
-
-fn parse_config(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let filename = args[2].clone();
-
-    Config { query, filename }
 }
