@@ -1,4 +1,5 @@
 use std::env;
+use std::process;
 use std::fs::File;
 use std::io::prelude::*;
 
@@ -23,12 +24,14 @@ fn main() {
     // .collect -> iterator to vector
     let args: Vec<String> = env::args().collect();
 
-    let config = Config::new(&args).unwrap();
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        println!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
 
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
 
-    // ? -> handle error
     let mut f = File::open(config.filename).expect("file not found");
     let mut content = String::new();
     f.read_to_string(&mut content).expect("failed to read file");
