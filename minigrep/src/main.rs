@@ -1,7 +1,8 @@
 use std::env;
-use std::process;
 use std::fs::File;
 use std::io::prelude::*;
+use std::process;
+use std::error::Error;
 
 struct Config {
     query: String,
@@ -32,9 +33,16 @@ fn main() {
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
 
-    let mut f = File::open(config.filename).expect("file not found");
+    run(config).unwrap();
+}
+
+fn run(config: Config) -> Result<(), Box<Error>> {
+    let mut f = File::open(config.filename)?;
+
     let mut content = String::new();
-    f.read_to_string(&mut content).expect("failed to read file");
+    f.read_to_string(&mut content)?;
 
     println!("Found: \n{}", content);
+
+    Ok(())
 }
