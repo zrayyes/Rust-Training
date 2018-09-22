@@ -1,0 +1,6 @@
+[package]
+name = "rename"
+version = "0.1.0"
+authors = ["Zuhair Rayyes <zuz1995@yahoo.com>"]
+
+[dependencies]
