@@ -14,5 +14,10 @@ fn get_processes() {
     }
 
     println!("Number of processes running: {}", bytes_returned / 4);
-    println!("{:?}",  &pids[0..]);
+    
+    for pid in pids.iter() {
+        if *pid != 0 {
+            println!("{}",*pid);
+        } 
+    }
 }
