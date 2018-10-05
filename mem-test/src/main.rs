@@ -4,12 +4,13 @@ fn main() {
 
 fn get_processes() {
     use winapi;
+    use winapi::shared::minwindef::DWORD;
     
-    let mut bytes_returned: u32 = 0;
+    let mut bytes_returned: DWORD = 0;
     // Create a large array to contain all process ids
-    let mut pids: [u32; 1024] = [0; 1024];
+    let mut pids: [DWORD; 1024] = [0; 1024];
     unsafe {
-        winapi::um::psapi::EnumProcesses(pids.as_mut_ptr(), pids.len() as u32, &mut bytes_returned);
+        winapi::um::psapi::EnumProcesses(pids.as_mut_ptr(), pids.len() as DWORD, &mut bytes_returned);
     }
 
     println!("Number of processes running: {}", bytes_returned / 4);
