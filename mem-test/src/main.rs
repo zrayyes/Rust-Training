@@ -3,6 +3,7 @@
 fn main() {
     let process_names = get_processes();
     for name in process_names {
+        // TODO: print unique
         println!("{}", name);
     }
     pause();
