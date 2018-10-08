@@ -1,18 +1,35 @@
-// TODO: Add process struct with functions
+use regex::Regex;
+use std::ffi::CString;
+use std::io;
+use std::io::prelude::*;
+use std::os::raw::c_void;
+use winapi::shared::minwindef::DWORD;
+use winapi::um::psapi;
+
+struct PROCESS<'a> {
+    pid: &'a u32,
+    handle: c_void,
+    name: String,
+}
+
+impl<'a> PROCESS<'a> {
+    fn name(&self) -> &String {
+        &self.name
+    }
+    fn name_mut(&mut self) -> &mut String {
+        &mut self.name
+    }
+}
 
 fn main() {
     let process_names = get_processes();
     for name in process_names {
-        // TODO: print unique
         println!("{}", name);
     }
     pause();
 }
 
 fn pause() {
-    use std::io;
-    use std::io::prelude::*;
-
     let mut stdin = io::stdin();
     let mut stdout = io::stdout();
 
@@ -25,10 +42,6 @@ fn pause() {
 }
 
 fn get_processes() -> Vec<String> {
-    use regex::Regex;
-    use std::ffi::CString;
-    use winapi::shared::minwindef::DWORD;
-    use winapi::um::psapi;
     let re = Regex::new(r"[^\\]*$").unwrap();
 
     let mut processes = Vec::new();
