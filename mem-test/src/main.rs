@@ -22,17 +22,19 @@ struct PROCESS {
 // }
 
 fn stringify_filename(mut name: [i8; 255]) -> String {
+    let re = Regex::new(r"[^\\]*$").unwrap();
     unsafe {
         let c_str = CString::from_raw(name.as_mut_ptr());
         let str_buf: String = c_str.to_str().unwrap().to_owned();
-        str_buf
+        let str_cap = re.captures(&str_buf).unwrap();
+        str_cap.get(0).unwrap().as_str().to_owned()
     }
 }
 
 fn main() {
-    let process_names = get_processes();
-    for name in process_names {
-        println!("{}", name);
+    let processes = get_processes();
+    for p in processes {
+        println!("{}", p.name);
     }
     pause();
 }
@@ -49,9 +51,7 @@ fn pause() {
     let _ = stdin.read(&mut [0u8]).unwrap();
 }
 
-fn get_processes() -> Vec<String> {
-    let re = Regex::new(r"[^\\]*$").unwrap();
-
+fn get_processes() -> Vec<PROCESS> {
     let mut processes = Vec::new();
     let mut bytes_returned: DWORD = 0;
     // Create a large array to contain all process ids
@@ -69,15 +69,14 @@ fn get_processes() -> Vec<String> {
                 let mut filename: [i8; 255] = [0; 255];
                 psapi::GetProcessImageFileNameA(handle, filename.as_mut_ptr(), 255);
 
-                let process = PROCESS {
+                let p = PROCESS {
                     pid: *pid,
                     handle: handle,
                     name: stringify_filename(filename),
                 };
 
-                if process.name != "" {
-                    let str_cap = re.captures(&process.name).unwrap();
-                    processes.push(str_cap.get(0).unwrap().as_str().to_owned());
+                if p.name != "" {
+                    processes.push(p);
                 }
             }
         }
