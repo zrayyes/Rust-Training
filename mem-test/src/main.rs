@@ -2,22 +2,30 @@ use regex::Regex;
 use std::ffi::CString;
 use std::io;
 use std::io::prelude::*;
-use std::os::raw::c_void;
+use winapi::ctypes::c_void;
 use winapi::shared::minwindef::DWORD;
 use winapi::um::psapi;
 
-struct PROCESS<'a> {
-    pid: &'a u32,
-    handle: c_void,
+struct PROCESS {
+    pid: u32,
+    handle: *mut c_void,
     name: String,
 }
 
-impl<'a> PROCESS<'a> {
-    fn name(&self) -> &String {
-        &self.name
-    }
-    fn name_mut(&mut self) -> &mut String {
-        &mut self.name
+// impl PROCESS {
+//     fn name(&self) -> &String {
+//         &self.name
+//     }
+//     fn name_mut(&mut self) -> &mut String {
+//         &mut self.name
+//     }
+// }
+
+fn stringify_filename(mut name: [i8; 255]) -> String {
+    unsafe {
+        let c_str = CString::from_raw(name.as_mut_ptr());
+        let str_buf: String = c_str.to_str().unwrap().to_owned();
+        str_buf
     }
 }
 
@@ -61,10 +69,14 @@ fn get_processes() -> Vec<String> {
                 let mut filename: [i8; 255] = [0; 255];
                 psapi::GetProcessImageFileNameA(handle, filename.as_mut_ptr(), 255);
 
-                let c_str = CString::from_raw(filename.as_mut_ptr());
-                let str_buf: String = c_str.to_str().unwrap().to_owned();
-                if str_buf != "" {
-                    let str_cap = re.captures(&str_buf).unwrap();
+                let process = PROCESS {
+                    pid: *pid,
+                    handle: handle,
+                    name: stringify_filename(filename),
+                };
+
+                if process.name != "" {
+                    let str_cap = re.captures(&process.name).unwrap();
                     processes.push(str_cap.get(0).unwrap().as_str().to_owned());
                 }
             }
