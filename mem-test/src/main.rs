@@ -34,7 +34,7 @@ fn stringify_filename(mut name: [i8; 255]) -> String {
 fn main() {
     let processes = get_processes();
     for p in processes {
-        println!("{}", p.name);
+        println!("{} - {}", p.pid, p.name);
     }
     pause();
 }
@@ -81,5 +81,6 @@ fn get_processes() -> Vec<PROCESS> {
             }
         }
     }
+    processes.sort_unstable_by_key(|p| p.pid);
     processes
 }
