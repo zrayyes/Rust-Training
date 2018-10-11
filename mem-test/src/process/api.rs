@@ -1,3 +1,6 @@
+// see
+// https://www.codeproject.com/Articles/4865/Performing-a-hex-dump-of-another-process-s-memory
+
 use regex::Regex;
 use std::ffi::CString;
 use winapi::ctypes::c_void;
@@ -29,8 +32,6 @@ pub fn get_processes() -> Vec<PROCESS> {
         psapi::EnumProcesses(pids.as_mut_ptr(), pids.len() as DWORD, &mut bytes_returned);
     }
 
-    println!("Number of processes running: {}", bytes_returned / 4);
-
     for pid in pids.iter() {
         if *pid != 0 {
             unsafe {
@@ -52,4 +53,13 @@ pub fn get_processes() -> Vec<PROCESS> {
     }
     processes.sort_unstable_by_key(|p| p.pid);
     processes
+}
+
+pub fn get_process_from_vector(vector: Vec<PROCESS>, name: &str) -> PROCESS {
+    for p in vector {
+        if p.name == *name {
+            return p;
+        }
+    }
+    panic!("No process found with that name")
 }

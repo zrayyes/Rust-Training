@@ -1,15 +1,7 @@
-mod process_api;
+mod process;
 
 use std::io;
 use std::io::prelude::*;
-
-fn main() {
-    let processes = process_api::get_processes();
-    for p in processes {
-        println!("{} - {}", p.pid, p.name);
-    }
-    pause();
-}
 
 fn pause() {
     let mut stdin = io::stdin();
@@ -19,4 +11,12 @@ fn pause() {
     stdout.flush().unwrap();
 
     let _ = stdin.read(&mut [0u8]).unwrap();
+}
+
+fn main() {
+    let all_processes = process::api::get_processes();
+    for p in all_processes {
+        println!("PID: {} - NAME: {}", p.pid, p.name);
+    }
+    pause();
 }
