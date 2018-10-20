@@ -1,0 +1,11 @@
+[package]
+name = "c_functions"
+version = "0.1.0"
+authors = ["Zuhair Rayyes <zuz1995@yahoo.com>"]
+edition = "2018"
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+cc = "1.0"
