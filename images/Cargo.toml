@@ -1,0 +1,8 @@
+[package]
+name = "images"
+version = "0.1.0"
+authors = ["Zuhair Rayyes <rayyes.z@ikarus.at>"]
+edition = "2018"
+
+[dependencies]
+image = "*"
